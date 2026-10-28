@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router'
 
 
 export const Navbar = () => {
-    const { products } = useContext(CartContexto);
+    const { productCart } = useContext(CartContexto);
     const navigate = useNavigate();
+
+    const totalItems = productCart.reduce((total, item) => total + item.quantity, 0);
 
     return (
         <div className=' flex justify-center bg-[#C8A2C8] p-1 text-amber-50'>
@@ -14,7 +16,7 @@ export const Navbar = () => {
                     <a onClick={() => navigate('/')}>Catálogo</a>
                 </li>
                 <li>
-                    <a onClick={() => navigate('/cart')}>Carrito </a>
+                    <a onClick={() => navigate('/cart')}>Carrito {totalItems > 0 && `(${totalItems})`} </a>
                 </li>
                 <li>
                     <a onClick={() => navigate('/add')}>Agregar Producto</a>
